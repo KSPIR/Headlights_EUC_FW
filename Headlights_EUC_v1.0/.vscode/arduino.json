@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:pro",
+    "sketch": "Headlights_EUC_v1.0.ino",
+    "port": "COM5",
+    "configuration": "cpu=16MHzatmega328"
+}

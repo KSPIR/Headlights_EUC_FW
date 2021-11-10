@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "c:\\Program Files (x86)\\Arduino\\tools\\**",
+                "c:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "c:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\**",
+                "c:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\lib\\**",
+                
+
+               "c:\\Program Files (x86)\\Arduino\\hardware\tools\\avr\\avr\\include\\avr\\**",
+               "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino"
+                //"${workspaceRoot}"
+            ],
+            "forcedInclude": [
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h",
+                "c:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard\\pins_arduino.h"
+            ],
+            "intelliSenseMode": "gcc-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "defines": ["USBCON"]
+        }
+    ],
+    "version": 4
+}
