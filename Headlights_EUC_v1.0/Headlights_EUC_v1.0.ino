@@ -42,7 +42,7 @@ AnalogMultiButton buttons(BUTTONS_PIN, BUTTONS_TOTAL, BUTTONS_VALUES);
 #define STRIP_FL_PIN 5  // LED Strip Передний левый 
 #define STRIP_BR_PIN 6  // LED Strip Задний правый 
 #define STRIP_BL_PIN 7  // LED Strip Задний Левый 
-#define STRIP_CN_PIN 8  // LED Strip Задний центральный 
+#define STRIP_BC_PIN 8  // LED Strip Задний центральный 
 // Указываем количество светодиодов в каждой ленте
 #define NUMLEDS_FR 16
 #define NUMLEDS_FL 16
@@ -61,31 +61,31 @@ microLED<NUMLEDS_FR, STRIP_FR_PIN, MLED_NO_CLOCK, LED_WS2812, ORDER_GRB, CLI_AVE
 microLED<NUMLEDS_FL, STRIP_FL_PIN, MLED_NO_CLOCK, LED_WS2812, ORDER_GRB, CLI_AVER> strip_FL;
 microLED<NUMLEDS_BR, STRIP_BR_PIN, MLED_NO_CLOCK, LED_WS2812, ORDER_GRB, CLI_AVER> strip_BR;
 microLED<NUMLEDS_BL, STRIP_BL_PIN, MLED_NO_CLOCK, LED_WS2812, ORDER_GRB, CLI_AVER> strip_BL;
-microLED<NUMLEDS_CN, STRIP_CN_PIN, MLED_NO_CLOCK, LED_WS2812, ORDER_GRB, CLI_AVER> strip_CN;
+microLED<NUMLEDS_CN, STRIP_BC_PIN, MLED_NO_CLOCK, LED_WS2812, ORDER_GRB, CLI_AVER> strip_BC;
 /*----------------------------------------------------------------------------*/
 /* Функция первичной инициализация светодиодных лент WS2812 ------------------*/
 void Init_LED_Strip()
 {
   // Настройка яркости при инициализации
-  strip_FR.setBrightness(BRIGHTNESS_DEF);
-  strip_FL.setBrightness(BRIGHTNESS_DEF);
-  strip_BR.setBrightness(BRIGHTNESS_DEF);
-  strip_BL.setBrightness(BRIGHTNESS_DEF);
-  strip_CN.setBrightness(BRIGHTNESS_DEF);
+  strip_FR.setBrightness(BRIGHTNESS_DEF_FRONT);
+  strip_FL.setBrightness(BRIGHTNESS_DEF_FRONT);
+  strip_BR.setBrightness(BRIGHTNESS_DEF_BACK);
+  strip_BL.setBrightness(BRIGHTNESS_DEF_BACK);
+  strip_BC.setBrightness(BRIGHTNESS_DEF_BACK);
 
   // очистка буфера (выключить диоды, чёрный цвет)
   strip_FR.clear();
   strip_FL.clear();
   strip_BR.clear();
   strip_BL.clear();
-  strip_CN.clear();
+  strip_BC.clear();
 
   // применяется при выводе .show() !
   strip_FR.show(); 
   strip_FL.show();
   strip_BR.show(); 
   strip_BL.show();
-  strip_CN.show();
+  strip_BC.show();
 }
 /*----------------------------------------------------------------------------*/
 /* Функция габаритных фонарей по умолчанию -----------------------------------*/
@@ -104,19 +104,19 @@ void Led_state_def()
       strip_FL.setBrightness(BRIGHTNESS_DEF_FRONT);
       strip_BR.setBrightness(BRIGHTNESS_DEF_BACK);
       strip_BL.setBrightness(BRIGHTNESS_DEF_BACK);
-      strip_CN.setBrightness(BRIGHTNESS_DEF_BACK);
+      strip_BC.setBrightness(BRIGHTNESS_DEF_BACK);
 
       strip_FR.fill(mWhite);
       strip_FL.fill(mWhite);
       strip_BR.fill(mRed);
       strip_BL.fill(mRed);
-      strip_CN.fill(mRed);
+      strip_BC.fill(mRed);
 
       strip_FR.show(); 
       strip_FL.show();
       strip_BR.show(); 
       strip_BL.show();
-      strip_CN.show();
+      strip_BC.show();
     }
     if (set.Key_down == false &&  set.Key_left == false &&
                                   set.Key_right == false &&
@@ -124,50 +124,50 @@ void Led_state_def()
     {
       strip_BR.setBrightness(BRIGHTNESS_DEF_BACK);
       strip_BL.setBrightness(BRIGHTNESS_DEF_BACK);
-      strip_CN.setBrightness(BRIGHTNESS_DEF_BACK);
+      strip_BC.setBrightness(BRIGHTNESS_DEF_BACK);
 
       strip_BR.fill(mRed);
       strip_BL.fill(mRed);
-      strip_CN.fill(mRed);
+      strip_BC.fill(mRed);
 
       strip_BR.show(); 
       strip_BL.show();
-      strip_CN.show();
+      strip_BC.show();
     }
 
     if (set.Key_left == true)
     {
       strip_FR.setBrightness(BRIGHTNESS_DEF_FRONT);
       strip_BR.setBrightness(BRIGHTNESS_DEF_BACK);
-      strip_CN.setBrightness(BRIGHTNESS_DEF_BACK);
+      strip_BC.setBrightness(BRIGHTNESS_DEF_BACK);
 
       strip_FR.fill(mWhite);
       strip_BR.fill(mRed);
-      strip_CN.fill(mRed);
+      strip_BC.fill(mRed);
 
       strip_FR.show(); 
       strip_BR.show(); 
-      strip_CN.show();
+      strip_BC.show();
     }
     else if (set.Key_right == true)
     {
       strip_FL.setBrightness(BRIGHTNESS_DEF_FRONT);
       strip_BL.setBrightness(BRIGHTNESS_DEF_BACK);
-      strip_CN.setBrightness(BRIGHTNESS_DEF_BACK);
+      strip_BC.setBrightness(BRIGHTNESS_DEF_BACK);
 
       strip_FL.fill(mWhite);
       strip_BL.fill(mRed);
-      strip_CN.fill(mRed);
+      strip_BC.fill(mRed);
 
       strip_FL.show(); 
       strip_BL.show(); 
-      strip_CN.show();
+      strip_BC.show();
     }
     if (set.Key_S1 == true)
     {
-      strip_CN.setBrightness(BRIGHTNESS_DEF_BACK);
-      strip_CN.fill(mRed);
-      strip_CN.show();
+      strip_BC.setBrightness(BRIGHTNESS_DEF_BACK);
+      strip_BC.fill(mRed);
+      strip_BC.show();
     }
   }
 }
@@ -236,38 +236,38 @@ void loop()
     if (set.Key_left == true)
     { 
       strip_BR.setBrightness(BRIGHTNESS_MAX);
-      strip_CN.setBrightness(BRIGHTNESS_MAX);
+      strip_BC.setBrightness(BRIGHTNESS_MAX);
       strip_BR.fill(mRed);
-      strip_CN.fill(mRed);
+      strip_BC.fill(mRed);
       strip_BR.show(); 
-      strip_CN.show();
+      strip_BC.show();
     }
     else if (set.Key_right == true)
     {
       strip_BL.setBrightness(BRIGHTNESS_MAX);
-      strip_CN.setBrightness(BRIGHTNESS_MAX);
+      strip_BC.setBrightness(BRIGHTNESS_MAX);
       strip_BL.fill(mRed);
-      strip_CN.fill(mRed);
+      strip_BC.fill(mRed);
       strip_BL.show(); 
-      strip_CN.show();
+      strip_BC.show();
     }
     else if (set.Key_S1 == true)
     {
-      strip_CN.setBrightness(BRIGHTNESS_MAX);
-      strip_CN.fill(mRed);
-      strip_CN.show();
+      strip_BC.setBrightness(BRIGHTNESS_MAX);
+      strip_BC.fill(mRed);
+      strip_BC.show();
     }
     else
     {
       strip_BR.setBrightness(BRIGHTNESS_MAX);
       strip_BL.setBrightness(BRIGHTNESS_MAX);
-      strip_CN.setBrightness(BRIGHTNESS_MAX);
+      strip_BC.setBrightness(BRIGHTNESS_MAX);
       strip_BR.fill(mRed);
       strip_BL.fill(mRed);
-      strip_CN.fill(mRed);
+      strip_BC.fill(mRed);
       strip_BR.show();
       strip_BL.show(); 
-      strip_CN.show();
+      strip_BC.show();
     }
   } 
   else Led_state_def();  
